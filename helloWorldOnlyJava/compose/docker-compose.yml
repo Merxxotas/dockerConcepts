@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+  helloWorldJavaMaven:
+    image: openjdk:23-slim-bullseye
+    container_name: hello_worldJava_Maven
+    working_dir: /Main
+    volumes:
+      - .:/Main
+      - onlyJava:/onlyJava
+    ports:
+      - "8080:80"
+    command: >
+      /bin/bash -c "javac Main.java && java Main"
+    tty: true
+
+volumes:
+  onlyJava:
+    external: false

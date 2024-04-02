@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+  app:
+    image: maven:3.8.7-openjdk-18-slim
+    volumes:
+      - .:/MainJavaMaven
+      - maven_repo:/root/.m2
+      - javaMaven:/javaMaven
+    working_dir: /MainJavaMaven
+    command: >
+      /bin/sh -c "mvn package -DskipTests && java -jar target/*.jar"
+
+volumes:
+  maven_repo:
+  javaMaven:
+    external: false

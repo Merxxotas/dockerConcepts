@@ -1,0 +1,26 @@
+version: "3"
+
+networks:
+  gitea:   # This name should match the network you created with `docker network create trainingNetwork`
+    external: false   # Set to true because the network is already created outside of this docker-compose
+
+services:
+  server:
+    image: gitea/gitea:1.21.5
+    container_name: gitea
+    environment:
+      - USER_UID=1000
+      - USER_GID=1000
+      - TZ=America/Bogota
+    restart: always
+    networks:
+      - gitea   # Referencing the network by its name
+    volumes:
+      - ./gitea:/data
+    ports:
+      - "3001:3000"
+      - "222:22"
+
+volumes:
+  onlyJava:
+    external: true
